@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    restart: always
+    ports:
+      - target: 80
+        published: 8090
+        protocol: tcp
+        mode: ingress
+    networks:
+      - frontend
+      - backend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+      placement:
+        constraints:
+          - node.role == worker
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: admin
+    volumes:
+      - /mnt/data/wordpress/file:/var/www/html
+
+  db:
+    image: mariadb:jammy
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+      MARIADB_ROOT_PASSWORD: admin
+    volumes:
+      - /mnt/data/wordpress/db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+
+networks:
+  frontend:
+  backend:
+  

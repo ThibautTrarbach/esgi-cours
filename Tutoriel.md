@@ -75,12 +75,15 @@ sudo apt-get update && apt-get install docker-ce docker-ce-cli containerd.io doc
 ```
 CEPH_RELEASE=18.2.0
 curl --silent --remote-name --location https://download.ceph.com/rpm-${CEPH_RELEASE}/el9/noarch/cephadm
+chmod +x cephadm
 ./cephadm add-repo --release reef
+apt update -y
 ./cephadm install
 ```
 Initialization du cluster : 
+(Remplacer par l'ip de l'hote)
 ```
-cephadm bootstrap --mon-ip 10.100.1.200 --allow-overwrite
+cephadm bootstrap --mon-ip 10.100.1.200 --allow-overwrite --allow-fqdn-hostname
 ```
 
 Suite a cette commande recupere le nom d'utilisateur et le mots de passe indiqué en sortie de script

@@ -88,9 +88,35 @@ cephadm bootstrap --mon-ip 10.100.1.200 --allow-overwrite --allow-fqdn-hostname
 
 Suite a cette commande recupere le nom d'utilisateur et le mots de passe indiqué en sortie de script
 
-# Pendant les test completer cette partie
+Sur le esgi1, recupere la clée ssh dans /etc/ceph/ceph.pub
 
+```
+cat  /etc/ceph/ceph.pub
+```
 
+Sur le reste des autre serveur, ajouter cette clée SSH a l'utilisateur root
+```
+nano /root/.ssh/authorized_keys
+```
+
+Se connecter a https://10.200.1.200:8443
+Changer le mots de passe
+
+Cliqué sur expand cluster
+
+Ensuite cliqué sur add node et rensegné le hostname et l'ip.
+Et recomencée pour l'ensemble des nodes, sauf le 1.
+
+Au bous de 3 ou 4 minutes l'ensemble des node devrais apparaitre dans la liste.
+Quand il sont tous la, cliqué sur next jusqua avoir terminer le wizard.
+
+Ensuite attendre 10 minutes que le cluster se contruise.
+
+Après cela, allez dans le menu file system et crée en un qui se nomme data.
+Un message d'erreur arrive, cela n'est pas un probleme, c'est le temps de la creation du file system
+
+## Sur l'ensemble des node iunstaller le packet ceph-common
+ ```apt install ceph-common -y ```
 ## Montage des repertoires
 
 Sur tout les serveurs sauf le node 1: 

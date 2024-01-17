@@ -10,22 +10,22 @@
 
 1 ip virtuel : 10.100.1.5
 
-## Preparation des machine : 
+## Préparation des machine : 
 
-Mise a jours et instalation des packets necesaire a la virtue : 
+Mise à jour et instalation des packets nécessaire au projet : 
 
 ```apt update && apt upgrade -y && apt install qemu-guest-agent -y```
 
-Changer les hostname par leur nom+".local.lan"
+Changer les hostname par leur nom + ".local.lan"
 exemple : 
 
 ```hostnamectl set-hostname ESGI-1.local.lan```
 
-Definir dans le fichier host les ip des nodes : 
+Définir dans le fichier host les ip des nodes : 
 
 ```nano /etc/hosts```
 
-Ajouter les ligne suivante :
+Ajouter les ligne suivante en modifiant les adresses ip par les vôtres :
 ```
 10.100.1.200 ESGI-1.local.lan
 10.100.1.201 ESGI-2.local.lan
@@ -34,7 +34,7 @@ Ajouter les ligne suivante :
 10.100.1.204 ESGI-5.local.lan
 ```
 
-Modifier la seconde ligne 172.0.0.1 par le hostname du serveur
+Modifier la seconde ligne 127.0.1.1 par le hostname du serveur
 
 Cela devrais donné un fichier correspondant (Dans l'exemple le serveur ESGI-1) : 
 ```
@@ -71,7 +71,7 @@ echo \
 sudo apt-get update && apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
-## Instalation de ceph (ESGI-1) : 
+## Instalation de ceph uniquement sur le serveur 1 (ESGI-1) : 
 ```
 CEPH_RELEASE=18.2.0
 curl --silent --remote-name --location https://download.ceph.com/rpm-${CEPH_RELEASE}/el9/noarch/cephadm
@@ -80,54 +80,55 @@ chmod +x cephadm
 apt update -y
 ./cephadm install
 ```
-Initialization du cluster : 
-(Remplacer par l'ip de l'hote)
+Initialisation du cluster : 
+(Remplacer par l'ip de l'hôte)
 ```
 cephadm bootstrap --mon-ip 10.100.1.200 --allow-overwrite --allow-fqdn-hostname
 ```
 
-Suite a cette commande recupere le nom d'utilisateur et le mots de passe indiqué en sortie de script
+Suite à cette commande récuperer le nom d'utilisateur et le mot de passe indiqué en sortie de script
 
-Sur le esgi1, recupere la clée ssh dans /etc/ceph/ceph.pub
+Sur le serveur ESGI-1, récuperer la clé ssh dans /etc/ceph/ceph.pub
 
 ```
 cat  /etc/ceph/ceph.pub
 ```
 
-Sur le reste des autre serveur, ajouter cette clée SSH a l'utilisateur root
+Sur le reste des serveurs, ajouter cette clée SSH a l'utilisateur root
 ```
 nano /root/.ssh/authorized_keys
 ```
 
-Se connecter a https://10.200.1.200:8443
-Changer le mots de passe
+Se connecter a https://10.200.1.200:8443 ( Remplacer par l'ip de votre node 1)
+Changer le mot de passe
 
-Cliqué sur expand cluster
+Cliquer sur "Expand cluster"
 
-Ensuite cliqué sur add node et rensegné le hostname et l'ip.
-Et recomencée pour l'ensemble des nodes, sauf le 1.
+Ensuite cliquer sur Add node et rensegné le hostname et l'ip.
+Recomencer pour l'ensemble des nodes, sauf le 1.
 
-Au bous de 3 ou 4 minutes l'ensemble des node devrais apparaitre dans la liste.
-Quand il sont tous la, cliqué sur next jusqua avoir terminer le wizard.
+Au bous de 3 ou 4 minutes, l'ensemble des node devrait apparaître dans la liste.
+Quand il sont tous présent, cliquer sur next jusqu'a avoir terminer la configuration.
 
 Ensuite attendre 10 minutes que le cluster se contruise.
 
-Après cela, allez dans le menu file system et crée en un qui se nomme data.
-Un message d'erreur arrive, cela n'est pas un probleme, c'est le temps de la creation du file system
+Après cela, allez dans le menu file system et en créez un que l'on nomme Data.
+Un message d'erreur arrive, cela n'est pas un probleme, c'est le temps de la creation du file system.
 
 
-## Montage des repertoires
+## Montage des répertoires
 
-Sur l'ensemble des node installer le packet ceph-common
+Sur l'ensemble des nodes, installer le packet ceph-common
  ```apt install ceph-common -y ```
 
-Recupéré sur le node 1 recuperer les fichier suivant :
+Recupérer sur le node 1 les fichier suivant :
 - /etc/ceph/ceph.client.admin.keyring
 - /etc/ceph/ceph.conf
 
-Les placer au même endroit sur l'enseemble des node sauf le node 1
+Les placer au même endroit sur l'ensemble des nodes.
 
 Sur l'ensemble des serveur : 
+
 Modifier le fstab
 ```nano /etc/fstab```
 ```
@@ -137,22 +138,22 @@ Modifier le fstab
 Crée le dossier /mnt/data
 ```mkdir /mnt/data```
 
-monté le disk : 
+monter le disk : 
 ```mount -a```
 
-## Creation du cluster Docker Swarm
+## Création du cluster Docker Swarm
 
-Initialisation de docker swarm (ESGI1) : 
+Initialisation de docker swarm (ESGI-1) : 
 ``` docker swarm init```
 
-A la sortie de la comande recupere le tokec qui est indiqué. Il faudra excuter le commande en question sur les autre nodes
+A la sortie de la commande récuperer la commande qui apparait et l'éxecuter sur chacune des nodes.
 
-Ensuite sur le node 1 executer : 
+Ensuite sur le node 1 éxecuter (changer le host-name par celui de votre serveur 2) : 
 docker node promote ESGI-2.local.lan
 
 ## Mise en place 
 
-Sur ESGI-1 executer les commandes suivante : 
+Sur ESGI-1 éxecuter les commandes suivante en modifiant les ip: 
 ```
 echo "modprobe ip_vs" >> /etc/modules
 modprobe ip_vs
@@ -166,7 +167,7 @@ docker run -d --name keepalived --restart=always \
   osixia/keepalived:2.0.20
 ```
 
-Sur ESGI-2 executer les commandes suivante : 
+Sur ESGI-2 éxecuter les commandes suivante en modifiant les ip: 
 ```
 echo "modprobe ip_vs" >> /etc/modules
 modprobe ip_vs
@@ -180,9 +181,9 @@ docker run -d --name keepalived --restart=always \
   osixia/keepalived:2.0.20
 ```
 
-# Deploiment de la stack Docker
+# Déploiment de la stack Docker
 
-Crée les dossier necesaire a la stack
+Créer les dossier nécessaire à la stack
 ```
 mkdir -p /mnt/data/wordpress/db
 mkdir -p /mnt/data/wordpress/file
@@ -192,9 +193,9 @@ télécharger la stack :
 ```
 wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stack1.yaml
 ```
-et collé la stack
+et coller la stack
 
-Deployer la stack du projet : 
+Déployer la stack du projet : 
 ```
 docker stack deploy -c stack1.yaml stack1
 ```

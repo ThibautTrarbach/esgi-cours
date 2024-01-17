@@ -29,7 +29,7 @@ services:
       WORDPRESS_DB_USER: admin
       WORDPRESS_DB_PASSWORD: admin
     volumes:
-      - /mnt/data/wordpress/file:/var/www/html
+      - /mnt/data/wordpress2/file:/var/www/html
 
   db:
     image: mariadb:jammy
@@ -39,7 +39,7 @@ services:
       MARIADB_PASSWORD: admin
       MARIADB_ROOT_PASSWORD: admin
     volumes:
-      - /mnt/data/wordpress/db:/var/lib/mysql
+      - /mnt/data/wordpress2/db:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:

@@ -210,14 +210,14 @@ docker stack rm stack1
 
 Crée les dossier necesaire a la stack
 ```
-mkdir -p /mnt/data/wordpress/db
-mkdir -p /mnt/data/wordpress/file
+mkdir -p /mnt/data/wordpress2/db
+mkdir -p /mnt/data/wordpress2/file
 mkdir -p /mnt/data/proxy/
 ```
 
 Telecharger la config traefik
 ```
-wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/traefik/traefik.yaml
+wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/traefik/traefik.yml
 ```
 
 Deplacer la config traefik : 

@@ -1,7 +1,7 @@
 # Documentation Docker
 
 ## Description de l'infrastructure : 
-5 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Ubuntu 22.04) : 
+5 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Ubuntu Serveur 22.04) : 
 - ESGI-1 | IP 10.100.1.200 | TYPE : Master
 - ESGI-2 | IP 10.100.1.201 | TYPE : Master
 - ESGI-3 | IP 10.100.1.202 | TYPE : Worker

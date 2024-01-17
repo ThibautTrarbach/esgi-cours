@@ -1,5 +1,13 @@
 # Documentation Docker
 
+## Pré-requis :
+5 VM compposé de :
+- 2 Coeur
+- 4 Go de RAM
+- 1 disques principale de 64 Go
+- 1 disque non formaté de 32 Go
+- Ubuntu serveur 22.04 minimum
+
 ## Description de l'infrastructure : 
 5 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Ubuntu Serveur 22.04) : 
 - ESGI-1 | IP 10.100.1.200 | TYPE : Master

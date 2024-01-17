@@ -140,10 +140,10 @@ monté le disk :
 
 ## Creation du cluster Docker Swarm
 
-Initialisation de docker swarm : 
-```sudo docker swarm init```
+Initialisation de docker swarm (ESGI1) : 
+``` docker swarm init```
 
-A la sortie de la comande recupere le tokec qui est indiqué. Il faura excuter le commande en question sur les autre nodes
+A la sortie de la comande recupere le tokec qui est indiqué. Il faudra excuter le commande en question sur les autre nodes
 
 Ensuite sur le node 1 executer : 
 docker node promote ESGI-2.local.lan
@@ -186,13 +186,13 @@ mkdir -p /mnt/data/wordpress/db
 mkdir -p /mnt/data/wordpress/file
 ```
 
-Crée la stack : 
+télécharger la stack : 
 ```
-nano wordpress.yaml
+wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stack1.yaml
 ```
 et collé la stack
 
 Deployer la stack du projet : 
 ```
-docker stack deploy -c wordpress.yaml wordpress
+docker stack deploy -c stack1.yaml stack1
 ```

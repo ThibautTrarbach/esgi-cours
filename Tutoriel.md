@@ -200,3 +200,5 @@ Déployer la stack du projet :
 ```
 docker stack deploy -c stack1.yaml stack1
 ```
+
+

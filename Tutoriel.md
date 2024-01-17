@@ -222,7 +222,7 @@ wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/traefik/tr
 
 Deplacer la config traefik : 
 ```
-mv traefik.yaml /mnt/data/proxy/traefik.yaml
+mv traefik.yml /mnt/data/proxy/traefik.yml
 ```
 
 Telecharger la stack2 : 

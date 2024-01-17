@@ -4,9 +4,9 @@
 5 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, ubuntu) : 
 - ESGI-1 | IP 10.100.1.200 | TYPE : Master
 - ESGI-2 | IP 10.100.1.201 | TYPE : Master
-- ESGI-3 | IP 10.100.1.202 | TYPE : Node
-- ESGI-4 | IP 10.100.1.203 | TYPE : Node
-- ESGI-5 | IP 10.100.1.204 | TYPE : Node
+- ESGI-3 | IP 10.100.1.202 | TYPE : Worker
+- ESGI-4 | IP 10.100.1.203 | TYPE : Worker
+- ESGI-5 | IP 10.100.1.204 | TYPE : Worker
 
 1 ip virtuel : 10.100.1.5
 

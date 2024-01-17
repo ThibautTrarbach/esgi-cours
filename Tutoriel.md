@@ -1,7 +1,7 @@
 # Documentation Docker
 
 ## Pré-requis :
-5 VM composé de minimum :
+5 VM composé de :
 - 2 Coeur
 - 4 Go de RAM
 - 1 disques principale de 64 Go

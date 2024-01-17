@@ -100,6 +100,7 @@ nano /root/.ssh/authorized_keys
 ```
 
 Se connecter a https://10.200.1.200:8443 ( Remplacer par l'ip de votre node 1)
+
 Changer le mot de passe
 
 Cliquer sur "Expand cluster"

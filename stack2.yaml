@@ -15,6 +15,7 @@ services:
         - "traefik.http.routers.wordpress.entrypoints=websecure"
         - "traefik.http.services.wordpress.loadbalancer.server.port=80"
         - "traefik.http.routers.wordpress.tls=true"
+        - "traefik.docker.network=stack2_proxy"
         - "traefik.http.services.wordpress.loadBalancer.sticky.cookie=true"
         - "traefik.http.services.wordpress.loadBalancer.sticky.cookie.name=wwordpress_cookie_name"
       replicas: 5

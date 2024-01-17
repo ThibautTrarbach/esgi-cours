@@ -130,7 +130,7 @@ Les placer au même endroit sur l'ensemble des nodes.
 
 Sur l'ensemble des serveur : 
 
-Modifier le fstab
+Modifier le fstab avec vos adresses ip :
 ```nano /etc/fstab```
 ```
 10.100.1.200,10.100.1.201:/ /mnt/data ceph name=admin,noatime,_netdev 0 0

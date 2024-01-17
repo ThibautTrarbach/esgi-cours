@@ -51,8 +51,6 @@ services:
   traefik:
     image: "traefik:v2.10"
     volumes:
-      - "/mnt/data/proxy/conf:/opt/traefik/services"
-      - "/mnt/data/proxy/cert:/opt/traefik/cert"
       - "/mnt/data/proxy/traefik.yml:/etc/traefik/traefik.yml"
     ports:
       - target: 443

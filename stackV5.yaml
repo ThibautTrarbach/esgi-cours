@@ -3,7 +3,7 @@ version: "3.8"
 services:
   wordpress:
     depends_on:
-      - db
+      - wordpress_db
     image: wordpress:latest
     networks:
       - proxy
@@ -25,14 +25,13 @@ services:
         constraints:
           - node.role == worker
     environment:
-      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_HOST: wordpress_db
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: admin
       WORDPRESS_DB_PASSWORD: admin
     volumes:
       - /mnt/data/wordpress/file:/var/www/html
-
-  db:
+  wordpress_db:
     image: mariadb:jammy
     environment:
       MARIADB_DATABASE: wordpress
@@ -41,8 +40,6 @@ services:
       MARIADB_ROOT_PASSWORD: admin
     volumes:
       - /mnt/data/wordpress/db:/var/lib/mysql
-    ports:
-      - "3306:3306"
     networks:
       - backend
     deploy:
@@ -50,7 +47,6 @@ services:
       placement:
         constraints:
           - node.role == worker
-
   traefik:
     image: "traefik:v2.10"
     volumes:
@@ -81,7 +77,6 @@ services:
       placement:
         constraints:
           - node.role == manager
-
   socket-proxy:
     image: tecnativa/docker-socket-proxy:edge
     deploy:
@@ -99,7 +94,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - socket-proxy
-
   whoami:
     image: "traefik/whoami"
     networks:
@@ -120,10 +114,98 @@ services:
           - node.role == worker
       restart_policy:
         condition: any
+  zabbix_db:
+    image: mysql:8.0-oracle
+    environment:
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix_pwd
+      MYSQL_ROOT_PASSWORD: root_pwd
+    volumes:
+      - /mnt/data/zabbix/db:/var/lib/mysql
+    networks:
+      - zabbix
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+  zabbix_snmptraps:
+    image: zabbix/zabbix-snmptraps:alpine-6.4-latest
+    volumes:
+      - /mnt/data/zabbix/snmptraps:/var/lib/zabbix/snmptraps:rw
+      - /var/lib/zabbix/mibs:/usr/share/snmp/mibs:ro
+    ports:
+      - target: 1162
+        published: 1162
+        protocol: udp
+        mode: ingress
+    networks:
+      - zabbix
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+  zabbix_java-gateway:
+    image: zabbix/zabbix-java-gateway:alpine-6.4-latest
+    networks:
+      - zabbix
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+  zabbix_server:
+    image: zabbix/zabbix-server-mysql:alpine-6.4-latest
+    environment:
+      DB_SERVER_HOST: zabbix_db
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix_pwd
+      MYSQL_ROOT_PASSWORD: root_pwd
+      ZBX_JAVAGATEWAY: zabbix_java-gateway
+    ports:
+      - target: 10051 
+        published: 10051 
+        protocol: tcp
+        mode: ingress
+    networks:
+      - zabbix
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+  zabbix_web:
+    image: zabbix/zabbix-server-mysql:alpine-6.4-latest
+    environment:
+      ZBX_SERVER_HOST: zabbix_server
+      DB_SERVER_HOST: zabbix_db
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix_pwd
+      MYSQL_ROOT_PASSWORD: root_pwd
+    networks:
+      - zabbix
+      - proxy
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.zabbix.rule=Host(`zabbix.ent-alpha.fr`)"
+        - "traefik.http.routers.zabbix.entrypoints=websecure"
+        - "traefik.http.services.zabbix.loadbalancer.server.port=80"
+        - "traefik.http.routers.zabbix.tls=true"
+        - "traefik.docker.network=stackv5_proxy"
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
 
 networks:
   bridge:
   proxy:
   socket-proxy:
   backend:
+  zabbix:
   

@@ -210,6 +210,8 @@ Créer les dossier nécessaire à la stack
 mkdir -p /mnt/data/wordpress/db
 mkdir -p /mnt/data/wordpress/file
 mkdir -p /mnt/data/proxy/
+/mnt/data/zabbix/snmptraps
+/mnt/data/zabbix/db
 ```
 
 Télècharger la configuration traefik

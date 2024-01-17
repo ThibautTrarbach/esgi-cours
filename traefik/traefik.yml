@@ -58,3 +58,15 @@ providers:
     exposedByDefault: false
     swarmMode: true
     network: proxy
+
+certificatesResolvers:
+  letsEncrypt:
+    acme:
+      email: ttrarbach@ent-alpha.fr
+      storage: acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      dnsChallenge:
+        provider: ovh
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"

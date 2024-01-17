@@ -45,7 +45,7 @@ log:
 # API and dashboard configuration
 ################################################################
 api:
-  insecure: false
+  insecure: true
   dashboard: true
 
 ################################################################

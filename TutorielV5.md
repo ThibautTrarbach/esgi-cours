@@ -85,7 +85,7 @@ ff02::2 ip6-allrouters"
 ## Instalation de docker: 
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh
-sh test-docker.sh
+sh get-docker.sh
 ```
 
 # Instalations du cluster CEPH
@@ -166,12 +166,12 @@ monter le disk :
 ## Création du cluster Docker Swarm
 
 Initialisation de docker swarm (ESGI-1) : 
-``` docker swarm init```
+```docker swarm init```
 
 A la sortie de la commande récuperer la commande qui apparait et l'éxecuter sur chacune des nodes.
 
 Ensuite sur ESGI-DOCKER01 éxecuter : 
-docker node promote ESGI-DOCKER02.ent-alpha.lan
+```docker node promote ESGI-DOCKER02.ent-alpha.lan```
 
 ## Mise en place 
 
@@ -209,30 +209,6 @@ Créer les dossier nécessaire à la stack
 ```
 mkdir -p /mnt/data/wordpress/db
 mkdir -p /mnt/data/wordpress/file
-```
-
-télécharger la stack : 
-```
-wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stack1.yaml
-```
-et coller la stack
-
-Déployer la stack du projet : 
-```
-docker stack deploy -c stack1.yaml stack1
-```
-
-
-# Stack 2 
-Supprimer la stack 1
-```
-docker stack rm stack1
-```
-
-Créer les dossier nécessaire à la stack
-```
-mkdir -p /mnt/data/wordpress2/db
-mkdir -p /mnt/data/wordpress2/file
 mkdir -p /mnt/data/proxy/
 ```
 
@@ -241,17 +217,17 @@ Télècharger la configuration traefik
 wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/traefik/traefik.yml
 ```
 
+Télécharger la stack : 
+```
+wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stackV5.yaml
+```
+
 Déplacer la configuration traefik : 
 ```
 mv traefik.yml /mnt/data/proxy/traefik.yml
 ```
 
-Télècharger la stack 2 : 
-```
-wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stack2.yaml
-```
-
 Déployer la stack du projet : 
 ```
-docker stack deploy -c stack2.yaml stack2
+docker stack deploy -c stackV5.yaml stackv5
 ```

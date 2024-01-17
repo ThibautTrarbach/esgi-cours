@@ -202,3 +202,35 @@ docker stack deploy -c stack1.yaml stack1
 ```
 
 
+# Stack 2 
+Delete la stack 1
+```
+docker stack rm stack1
+```
+
+Crée les dossier necesaire a la stack
+```
+mkdir -p /mnt/data/wordpress/db
+mkdir -p /mnt/data/wordpress/file
+mkdir -p /mnt/data/proxy/
+```
+
+Telecharger la config traefik
+```
+wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/traefik/traefik.yaml
+```
+
+Deplacer la config traefik : 
+```
+mv traefik.yaml /mnt/data/proxy/traefik.yaml
+```
+
+Telecharger la stack2 : 
+```
+wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stack2.yaml
+```
+
+Deployer la stack du projet : 
+```
+docker stack deploy -c stack2.yaml stack2
+```

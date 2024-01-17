@@ -115,18 +115,20 @@ Ensuite attendre 10 minutes que le cluster se contruise.
 Après cela, allez dans le menu file system et crée en un qui se nomme data.
 Un message d'erreur arrive, cela n'est pas un probleme, c'est le temps de la creation du file system
 
-## Sur l'ensemble des node iunstaller le packet ceph-common
- ```apt install ceph-common -y ```
+
 ## Montage des repertoires
 
-Sur tout les serveurs sauf le node 1: 
-Recupéré sur le node 1 les fichier suivant :
+Sur l'ensemble des node installer le packet ceph-common
+ ```apt install ceph-common -y ```
+
+Recupéré sur le node 1 recuperer les fichier suivant :
 - /etc/ceph/ceph.client.admin.keyring
 - /etc/ceph/ceph.conf
 
-Les placer au même endroit sur les serveurs
+Les placer au même endroit sur l'enseemble des node sauf le node 1
 
-modifier le fstab
+Sur l'ensemble des serveur : 
+Modifier le fstab
 ```nano /etc/fstab```
 ```
 10.100.1.200,10.100.1.201:/ /mnt/data ceph name=admin,noatime,_netdev 0 0

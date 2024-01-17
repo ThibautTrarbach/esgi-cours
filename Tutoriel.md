@@ -108,7 +108,7 @@ Cliquer sur "Expand cluster"
 Ensuite cliquer sur Add node et rensegné le hostname et l'ip.
 Recomencer pour l'ensemble des nodes, sauf le 1.
 
-Au bous de 3 ou 4 minutes, l'ensemble des node devrait apparaître dans la liste.
+Au bout de 3 ou 4 minutes, l'ensemble des node devrait apparaître dans la liste.
 Quand il sont tous présent, cliquer sur next jusqu'a avoir terminer la configuration.
 
 Ensuite attendre 10 minutes que le cluster se contruise.

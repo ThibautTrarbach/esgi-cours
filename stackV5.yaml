@@ -17,7 +17,7 @@ services:
         - "traefik.http.routers.wordpress.tls=true"
         - "traefik.docker.network=stackv5_proxy"
         - "traefik.http.services.wordpress.loadBalancer.sticky.cookie=true"
-        - "traefik.http.routers.traefik.tls.certresolver=letsEncrypt"
+        - "traefik.http.routers.wordpress.tls.certresolver=letsEncrypt"
         - "traefik.http.services.wordpress.loadBalancer.sticky.cookie.name=wwordpress_cookie_name"
       replicas: 5
       restart_policy:
@@ -126,7 +126,7 @@ services:
         - "traefik.http.routers.whoami.rule=Host(`whoami.ent-alpha.fr`)"
         - "traefik.http.routers.whoami.entrypoints=websecure"
         - "traefik.http.services.whoami.loadbalancer.server.port=80"
-        - "traefik.http.routers.traefik.tls.certresolver=letsEncrypt"
+        - "traefik.http.routers.whoami.tls.certresolver=letsEncrypt"
         - "traefik.http.routers.whoami.tls=true"
       replicas: 10
       placement:
@@ -172,7 +172,7 @@ services:
         - "traefik.http.routers.portainer.rule=Host(`portainer.ent-alpha.fr`)"
         - "traefik.http.routers.portainer.entrypoints=websecure"
         - "traefik.http.services.portainer.loadbalancer.server.port=9443"
-        - "traefik.http.routers.traefik.tls.certresolver=letsEncrypt"
+        - "traefik.http.routers.portainer.tls.certresolver=letsEncrypt"
         - "traefik.http.routers.portainer.tls=true"
         - "traefik.docker.network=stackv5_proxy"
       mode: replicated

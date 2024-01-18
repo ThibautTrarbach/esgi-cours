@@ -82,6 +82,10 @@ services:
       - bridge
     depends_on:
       - socket-proxy
+    secrets:
+      - ovh_endpoint
+      - ovh_application_key
+      - ovh_application_secret
     deploy:
       labels:
         - "traefik.enable=true"

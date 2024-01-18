@@ -28,6 +28,13 @@ entryPoints:
           priority: 42
 
   websecure:
+    http:
+      tls:
+        certResolver: letsEncrypt
+        domains:
+          - main : ent-alpha.fr
+            sans: *.ent-alpha.fr
+
     address: :443
     http2:
       maxConcurrentStreams: 250
@@ -63,7 +70,7 @@ certificatesResolvers:
   letsEncrypt:
     acme:
       email: ttrarbach@ent-alpha.fr
-      storage: acme.json
+      storage: /lets/cert/acme.json
       caServer: https://acme-staging-v02.api.letsencrypt.org/directory
       dnsChallenge:
         provider: ovh

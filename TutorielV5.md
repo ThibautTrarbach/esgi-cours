@@ -276,17 +276,18 @@ docker stack deploy -c stackV5.yaml stackv5
 
 Stack : 
 ```
-? 
+docker stack ls
+docker stacl ps %stackname%
 ```
 Nodes :
 ```
-? 
+docker node ls
 ```
 Token nodes :
 ```
-? 
+docker swarm join-token worker
 ```
 Token Manager :
 ```
-? 
+docker swarm join-token manager
 ```

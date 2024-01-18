@@ -86,6 +86,7 @@ services:
       - ovh_endpoint
       - ovh_application_key
       - ovh_application_secret
+      - ovh_consumer_key
     deploy:
       labels:
         - "traefik.enable=true"

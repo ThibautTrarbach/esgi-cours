@@ -186,6 +186,6 @@ networks:
   
 secrets:
   db_wordpress_pwd:
-    file: db_password
+    file: db_wordpress_pwd
   db_root_pwd:
-    file: db_root_password
+    file: db_root_pwd

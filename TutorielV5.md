@@ -242,6 +242,14 @@ wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stackV5.ya
 Crée un token applicatif ovh 
 https://www.ovh.com/auth/api/createToken
 
+Dans les droits mettre : 
+```
+GET /domain/zone/{domain.name}/*
+PUT /domain/zone/{domain.name}/*
+POST /domain/zone/{domain.name}/*
+DELETE /domain/zone/{domain.name}/*
+```
+
 Crée les secret necesaire avec les commande suivante
 ```
 printf "my super secret password" | docker secret create db_wordpress_pwd -

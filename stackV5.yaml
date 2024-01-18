@@ -184,3 +184,8 @@ networks:
     driver: overlay
     attachable: true
   
+secrets:
+  db_wordpress_pwd:
+    file: db_password
+  db_root_pwd:
+    file: db_root_password

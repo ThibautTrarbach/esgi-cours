@@ -28,20 +28,25 @@ services:
       WORDPRESS_DB_HOST: wordpress_db
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: admin
-      WORDPRESS_DB_PASSWORD: admin
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_wordpress_pwd
     volumes:
       - /mnt/data/wordpress/file:/var/www/html
+    secrets:
+      - db_wordpress_pwd
   wordpress_db:
     image: mariadb:jammy
     environment:
       MARIADB_DATABASE: wordpress
       MARIADB_USER: admin
-      MARIADB_PASSWORD: admin
-      MARIADB_ROOT_PASSWORD: admin
+      MARIADB_PASSWORD_FILE: /run/secrets/db_wordpress_pwd
+      MARIADB_ROOT_PASSWORD: /run/secrets/db_root_pwd
     volumes:
       - /mnt/data/wordpress/db:/var/lib/mysql
     networks:
       - backend
+    secrets:
+      - db_wordpress_pwd
+      - db_root_pwd
     deploy:
       replicas: 1
       placement:

@@ -32,8 +32,9 @@ entryPoints:
       tls:
         certResolver: letsEncrypt
         domains:
-          - main : ent-alpha.fr
-            sans: *.ent-alpha.fr
+          - main: ent-alpha.fr
+            sans: 
+              - "*.ent-alpha.fr"
 
     address: :443
     http2:

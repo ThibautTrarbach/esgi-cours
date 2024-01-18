@@ -226,7 +226,7 @@ mkdir -p /mnt/data/proxy/
 mkdir -p /mnt/data/zabbix/snmptraps
 mkdir -p /mnt/data/zabbix/db
 mkdir -p /mnt/data/portainer
-mkdir -p /lets/cert/
+mkdir -p /mnt/data/proxy/cert
 ```
 
 Télècharger la configuration traefik

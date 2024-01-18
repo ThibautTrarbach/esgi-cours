@@ -238,6 +238,12 @@ Télécharger la stack :
 wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stackV5.yaml
 ```
 
+Crée les secret necesaire avec les commande suivante
+```
+printf "my super secret password" | docker secret create db_wordpress_pwd -
+printf "my super secret password" | docker secret create db_root_pwd -
+```
+
 Déplacer la configuration traefik : 
 ```
 mv traefik.yml /mnt/data/proxy/traefik.yml

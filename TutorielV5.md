@@ -22,6 +22,7 @@
 - ESGI-DOCKER05 | IP 10.100.1.214 | TYPE : WORKER
 - ESGI-DOCKER06 | IP 10.100.1.215 | TYPE : WORKER
 - ESGI-DOCKER07 | IP 10.100.1.216 | TYPE : WORKER
+- ESGI-DOCKER08 | IP 10.100.1.217 | TYPE : MANAGER
 - KeepAlived | IP 10.100.1.220 | TYPE : IP Virtuel
 
 1 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Windows Serveur 2025) : 
@@ -58,6 +59,7 @@ Ajouter les ligne suivante en modifiant les adresses ip par les vôtres :
 10.100.1.214 ESGI-DOCKER05.ent-alpha.lan
 10.100.1.215 ESGI-DOCKER06.ent-alpha.lan
 10.100.1.216 ESGI-DOCKER07.ent-alpha.lan
+10.100.1.217 ESGI-DOCKER07.ent-alpha.lan
 ```
 
 Modifier la seconde ligne 127.0.1.1 par le hostname du serveur

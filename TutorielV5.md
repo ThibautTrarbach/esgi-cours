@@ -24,6 +24,10 @@
 - ESGI-DOCKER07 | IP 10.100.1.216 | TYPE : WORKER
 - KeepAlived | IP 10.100.1.220 | TYPE : IP Virtuel
 
+1 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Windows Serveur 2025) : 
+- ESGI-MONITOR | IP 10.100.1.205 | TYPE : MONITORING
+
+
 ## Preparations OS (CEPH | MANAGER | WORKER) : 
 
 Mise à jour et instalation des packets nécessaire sur l'infrastructure : 
@@ -46,6 +50,7 @@ Ajouter les ligne suivante en modifiant les adresses ip par les vôtres :
 10.100.1.202 ESGI-CEPH03.ent-alpha.lan
 10.100.1.203 ESGI-CEPH04.ent-alpha.lan
 10.100.1.204 ESGI-CEPH05.ent-alpha.lan
+10.100.1.205 ESGI-MONITOR.ent-alpha.lan
 10.100.1.210 ESGI-DOCKER01.ent-alpha.lan
 10.100.1.211 ESGI-DOCKER02.ent-alpha.lan
 10.100.1.212 ESGI-DOCKER03.ent-alpha.lan
@@ -135,6 +140,14 @@ Ensuite attendre 10 minutes que le cluster se contruise.
 
 Après cela, allez dans le menu file system et en créez un que l'on nomme Data.
 Un message d'erreur arrive, cela n'est pas un probleme, c'est le temps de la creation du file system.
+
+# Instalation du serveur de PRTG
+
+## Telechargement du produit
+```
+https://www.paessler.com/download/prtg-download?download=1
+```
+
 
 # Instalation des hotes Docker 
 

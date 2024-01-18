@@ -56,6 +56,12 @@ services:
     image: "traefik:v2.10"
     volumes:
       - "/mnt/data/proxy/traefik.yml:/etc/traefik/traefik.yml"
+      - "/mnt/data/proxy/cert:/lets/cert/"
+    environment:
+      - "OVH_ENDPOINT_FILE=/run/secrets/ovh_endpoint"
+      - "OVH_APPLICATION_KEY_FILE=/run/secrets/ovh_application_key"
+      - "OVH_APPLICATION_SECRET_FILE=/run/secrets/ovh_application_secret"
+      - "OVH_CONSUMER_KEY_FILE=/run/secrets/ovh_consumer_key"
     ports:
       - target: 443
         published: 443
@@ -188,4 +194,12 @@ secrets:
   db_wordpress_pwd:
     external: true
   db_root_pwd:
+    external: true
+  ovh_endpoint:
+    external: true
+  ovh_application_key:
+    external: true
+  ovh_application_secret:
+    external: true
+  ovh_consumer_key:
     external: true

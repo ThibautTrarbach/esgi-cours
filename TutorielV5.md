@@ -226,6 +226,7 @@ mkdir -p /mnt/data/proxy/
 mkdir -p /mnt/data/zabbix/snmptraps
 mkdir -p /mnt/data/zabbix/db
 mkdir -p /mnt/data/portainer
+mkdir -p /lets/cert/
 ```
 
 Télècharger la configuration traefik
@@ -238,10 +239,17 @@ Télécharger la stack :
 wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stackV5.yaml
 ```
 
+Crée un token applicatif ovh 
+https://www.ovh.com/auth/api/createToken
+
 Crée les secret necesaire avec les commande suivante
 ```
 printf "my super secret password" | docker secret create db_wordpress_pwd -
 printf "my super secret password" | docker secret create db_root_pwd -
+printf "my super secret password" | docker secret create ovh_endpoint -
+printf "my super secret password" | docker secret create ovh_application_key -
+printf "my super secret password" | docker secret create ovh_application_secret -
+printf "my super secret password" | docker secret create ovh_consumer_key -
 ```
 
 Déplacer la configuration traefik : 

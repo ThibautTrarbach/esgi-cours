@@ -72,7 +72,6 @@ certificatesResolvers:
     acme:
       email: ttrarbach@ent-alpha.fr
       storage: /lets/cert/acme.json
-      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
       dnsChallenge:
         provider: ovh
         resolvers:

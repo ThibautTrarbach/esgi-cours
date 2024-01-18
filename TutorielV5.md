@@ -9,7 +9,7 @@
 - Ubuntu serveur 22.04 
 
 ## Description de l'infrastructure : 
-5 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Ubuntu Serveur 22.04) : 
+12 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Ubuntu Serveur 22.04) : 
 - ESGI-CEPH01 | IP 10.100.1.200 | TYPE : CEPH
 - ESGI-CEPH02 | IP 10.100.1.201 | TYPE : CEPH
 - ESGI-CEPH03 | IP 10.100.1.202 | TYPE : CEPH

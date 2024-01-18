@@ -9,7 +9,7 @@
 - Ubuntu serveur 22.04 
 
 ## Description de l'infrastructure : 
-12 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Ubuntu Serveur 22.04) : 
+12 Hôte (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Ubuntu Serveur 22.04) : 
 - ESGI-CEPH01 | IP 10.100.1.200 | TYPE : CEPH
 - ESGI-CEPH02 | IP 10.100.1.201 | TYPE : CEPH
 - ESGI-CEPH03 | IP 10.100.1.202 | TYPE : CEPH
@@ -25,11 +25,11 @@
 - ESGI-DOCKER08 | IP 10.100.1.217 | TYPE : MANAGER
 - KeepAlived | IP 10.100.1.220 | TYPE : IP Virtuel
 
-1 Hote (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Windows Serveur 2025) : 
+1 Hôte (2cpu, 4go ram, 1 disk system de 64go, 1 disk non formaté de 32go, Windows Serveur 2025) : 
 - ESGI-MONITOR | IP 10.100.1.205 | TYPE : MONITORING
 
 
-## Preparations OS (CEPH | MANAGER | WORKER) : 
+## Préparations OS (CEPH | MANAGER | WORKER) : 
 
 Mise à jour et instalation des packets nécessaire sur l'infrastructure : 
 
@@ -64,7 +64,7 @@ Ajouter les ligne suivante en modifiant les adresses ip par les vôtres :
 
 Modifier la seconde ligne 127.0.1.1 par le hostname du serveur
 
-Cela devrais donné un fichier correspondant (Dans l'exemple le serveur ESGI-CEPH01) : 
+Cela devrait donné un fichier correspondant (Dans l'exemple le serveur ESGI-CEPH01) : 
 ```
 127.0.0.1 localhost
 127.0.1.1 ESGI-CEPH01.ent-alpha.lan
@@ -89,7 +89,7 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters"
 ```
 
-## Instalation de docker: 
+## Instalation de docker : 
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
@@ -121,12 +121,12 @@ Sur le serveur ESGI-CEPH01, récuperer la clé ssh dans /etc/ceph/ceph.pub
 cat  /etc/ceph/ceph.pub
 ```
 
-Sur l'ensemble des serveur CEPH, ajouter cette clée SSH a l'utilisateur root
+Sur l'ensemble des serveur CEPH, ajouter cet clé SSH à l'utilisateur root
 ```
 nano /root/.ssh/authorized_keys
 ```
 
-Se connecter a https://10.200.1.200:8443
+Se connecter à https://10.200.1.200:8443
 
 Changer le mot de passe
 
@@ -145,20 +145,20 @@ Un message d'erreur arrive, cela n'est pas un probleme, c'est le temps de la cre
 
 # Instalation du serveur de PRTG
 
-## Telechargement du produit
+## Télèchargement du produit
 ```
 https://www.paessler.com/download/prtg-download?download=1
 ```
 
 
-# Instalation des hotes Docker 
+# Instalation des hôtes Docker 
 
-## Montage du system de fichier CEPH
+## Montage du système de fichier CEPH
 
 Sur l'ensemble des nodes, installer le packet ceph-common
  ```apt install ceph-common -y ```
 
-Recupérer sur ESGI-CEPH01 les fichier suivant :
+Récupérer sur ESGI-CEPH01 les fichier suivant :
 - /etc/ceph/ceph.client.admin.keyring
 - /etc/ceph/ceph.conf
 
@@ -172,10 +172,10 @@ Modifier le fstab avec vos adresses ip :
 ESGI-CEPH01.ent-alpha.lan,ESGI-CEPH02.ent-alpha.lan,ESGI-CEPH03.ent-alpha.lan,ESGI-CEPH04.ent-alpha.lan,ESGI-CEPH05.ent-alpha.lan:/ /mnt/data ceph name=admin,noatime,_netdev 0 0
 ```
 
-Crée le dossier /mnt/data
+Créer le dossier /mnt/data
 ```mkdir /mnt/data```
 
-monter le disk : 
+Monter le disk : 
 ```mount -a```
 
 ## Création du cluster Docker Swarm
@@ -241,7 +241,7 @@ Télécharger la stack :
 wget https://raw.githubusercontent.com/ThibautTrarbach/esgi-cours/dev/stackV5.yaml
 ```
 
-Crée un token applicatif ovh 
+Créer un token applicatif ovh 
 https://www.ovh.com/auth/api/createToken
 
 Dans les droits mettre : 
@@ -252,7 +252,7 @@ POST /domain/zone/{domain.name}/*
 DELETE /domain/zone/{domain.name}/*
 ```
 
-Crée les secret necesaire avec les commande suivante
+Créer les secret nécessaire avec les commandes suivante
 ```
 printf "my super secret password" | docker secret create db_wordpress_pwd -
 printf "my super secret password" | docker secret create db_root_pwd -
@@ -270,4 +270,23 @@ mv traefik.yml /mnt/data/proxy/traefik.yml
 Déployer la stack du projet : 
 ```
 docker stack deploy -c stackV5.yaml stackv5
+```
+
+## Commandes :
+
+Stack : 
+```
+? 
+```
+Nodes :
+```
+? 
+```
+Token nodes :
+```
+? 
+```
+Token Manager :
+```
+? 
 ```
